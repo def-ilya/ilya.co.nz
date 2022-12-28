@@ -1,6 +1,12 @@
 import { Ubuntu } from "@next/font/google";
 import Image from "next/image";
 
+import { lazy, Suspense, useRef } from "react";
+import { Canvas, useLoader } from "@react-three/fiber";
+import { View, Bounds, Center, OrbitControls } from "@react-three/drei";
+import { AmbientLight } from "three";
+const LinkModel = lazy(() => import("./Link"));
+
 type AppProps = {
   title?: string;
   description?: string;
@@ -19,15 +25,18 @@ export default function PostItem({ title, description, link }: AppProps) {
           src={"/assets/Noisy-BG.png"}
         />
         <div className="text-lg relative z-10">{description}</div>
-        <div className="absolute top-0  right-0 z-0 w-24 h-24">
-          <Image
-            alt="link icon"
-            layout="fill"
-            objectFit="contain"
+        <a
+          href="https://blog.hubspot.com/marketing/how-to-start-a-blog"
+          className="absolute top-0  right-0 z-0 w-24 h-24"
+        >
+          <Canvas
             className="-mt-[40%] ml-[40%]"
-            src={"/assets/link-dynamic-gradient.png"}
-          />
-        </div>
+            onCreated={(state) => state.gl.setClearColor("black", 0.0)}
+            camera={{ position: [0, 0, 4] }}
+          >
+            <LinkModel />
+          </Canvas>
+        </a>
       </div>
     </div>
   );
