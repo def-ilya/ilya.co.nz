@@ -1,19 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Ubuntu, Ubuntu_Mono } from "@next/font/google";
 
-import { Canvas, useFrame, ThreeElements } from "@react-three/fiber";
 import Hero from "../components/Hero/Hero";
 import Posts from "../components/Posts/Posts";
-
-const ubuntu = Ubuntu({
-  weight: ["400", "700"],
-  style: ["normal"],
-  subsets: ["latin"],
-  variable: "--font-ubuntu",
-});
+import MasterCanvas from "@/components/Canvas/MasterCanvas";
+import { Waypoint } from "react-waypoint";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [page, setPage] = useState(0);
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerWidth });
+    });
+  }, []);
+
   return (
     <>
       <Head>
@@ -23,12 +26,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main
-        className={" bg-dark-blue text-light-clay font-sans " + ubuntu.variable}
-      >
+      <main className={" bg-dark-blue text-light-clay font-sans"}>
+        <div className="fixed top-0 left-0 right-0 h-screen w-screen z-0">
+          <MasterCanvas page={page} />
+        </div>
+
         <div className="max-w-[1280px] mx-auto">
           <Hero />
+          <Waypoint bottomOffset="-50%" onEnter={() => setPage(1)} />
+
           <Posts />
+          <Waypoint bottomOffset="-50%" onEnter={() => setPage(2)} />
+
+          <Posts />
+          <Waypoint bottomOffset="-50%" onEnter={() => setPage(3)} />
         </div>
       </main>
     </>

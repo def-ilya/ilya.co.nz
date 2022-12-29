@@ -14,6 +14,7 @@ module.exports = {
         "light-clay": "#E2E8F0",
       },
       fontFamily: {
+        mono: ["var(--font-ubuntu-mono)", ...fontFamily.mono],
         sans: ["var(--font-ubuntu)", ...fontFamily.sans],
       },
     },

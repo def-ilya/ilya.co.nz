@@ -7,13 +7,13 @@ import { View, Bounds, Center, OrbitControls } from "@react-three/drei";
 import { AmbientLight } from "three";
 const LinkModel = lazy(() => import("./Link"));
 
-type AppProps = {
+type Props = {
   title?: string;
   description?: string;
   link?: string;
 };
 
-export default function PostItem({ title, description, link }: AppProps) {
+export default function PostItem({ title, description, link }: Props) {
   return (
     <div className="max-w-[45%] mx-auto z-10">
       <h3 className={"text-4xl mb-3 ml-2 font-bold"}>{title}</h3>
