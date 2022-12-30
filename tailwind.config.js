@@ -12,6 +12,7 @@ module.exports = {
       colors: {
         "dark-blue": "#0F172A",
         "light-clay": "#E2E8F0",
+        "dark-clay": "#251C31",
       },
       fontFamily: {
         mono: ["var(--font-ubuntu-mono)", ...fontFamily.mono],

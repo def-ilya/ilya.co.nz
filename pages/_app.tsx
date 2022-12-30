@@ -7,14 +7,14 @@ const ubuntu = Ubuntu({
   weight: ["400", "700"],
   style: ["normal"],
   subsets: ["latin"],
-  // variable: "--font-ubuntu",
+  variable: "--font-ubuntu",
 });
 
 const ubuntuMono = Ubuntu_Mono({
   weight: ["400", "700"],
   style: ["normal"],
   subsets: ["latin"],
-  // variable: "--font-ubuntu",
+  variable: "--font-ubuntu-mono",
 });
 
 export default function App({ Component, pageProps }: AppProps) {

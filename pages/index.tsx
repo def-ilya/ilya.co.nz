@@ -3,12 +3,34 @@ import Image from "next/image";
 
 import Hero from "../components/Hero/Hero";
 import Posts from "../components/Posts/Posts";
-import MasterCanvas from "@/components/Canvas/MasterCanvas";
+import Stack from "@/components/Stack/Stack";
+import Orb from "@/components/Orb/Orb";
+import Cup from "@/components/Stack/Cup";
 import { Waypoint } from "react-waypoint";
 import { useState, useEffect } from "react";
 
+import {
+  Billboard,
+  Bounds,
+  MeshDistortMaterial,
+  Float,
+  ScrollControls,
+  Scroll,
+  Html,
+} from "@react-three/drei";
+
+import { motion as motion3d } from "framer-motion-3d";
+
+import * as THREE from "three";
+import {
+  EffectComposer,
+  Bloom,
+  Noise,
+  Vignette,
+} from "@react-three/postprocessing";
+import { Canvas } from "@react-three/fiber";
+
 export default function Home() {
-  const [page, setPage] = useState(0);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -17,6 +39,7 @@ export default function Home() {
     });
   }, []);
 
+  const [stackActive, setStackActive] = useState(false);
   return (
     <>
       <Head>
@@ -27,19 +50,35 @@ export default function Home() {
       </Head>
 
       <main className={" bg-dark-blue text-light-clay font-sans"}>
-        <div className="fixed top-0 left-0 right-0 h-screen w-screen z-0">
-          <MasterCanvas page={page} />
-        </div>
+        <div className="fixed top-0 left-0 right-0 h-screen w-screen z-20">
+          <Canvas shadows camera={{ position: [0, 0, 15], fov: 45 }}>
+            <color attach="background" args={["black"]}></color>
+            <ScrollControls
+              pages={3}
+              distance={1}
+              damping={6}
+              horizontal={false}
+              infinite={false}
+            >
+              <Orb emphasize={false} />
 
-        <div className="max-w-[1280px] mx-auto">
-          <Hero />
-          <Waypoint bottomOffset="-50%" onEnter={() => setPage(1)} />
+              <Scroll html>
+                <div className="w-screen">
+                  <div className="max-w-[1280px] mx-auto">
+                    <Hero />
 
-          <Posts />
-          <Waypoint bottomOffset="-50%" onEnter={() => setPage(2)} />
+                    <Posts />
 
-          <Posts />
-          <Waypoint bottomOffset="-50%" onEnter={() => setPage(3)} />
+                    <Stack
+                      active={stackActive}
+                      setActive={(val) => setStackActive(val)}
+                    />
+                  </div>
+                </div>
+              </Scroll>
+              <Cup active={stackActive} />
+            </ScrollControls>
+          </Canvas>
         </div>
       </main>
     </>

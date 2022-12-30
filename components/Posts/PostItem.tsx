@@ -1,7 +1,7 @@
 import { Ubuntu } from "@next/font/google";
 import Image from "next/image";
 
-import { lazy, Suspense, useRef } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { View, Bounds, Center, OrbitControls } from "@react-three/drei";
 import { AmbientLight } from "three";
@@ -14,13 +14,14 @@ type Props = {
 };
 
 export default function PostItem({ title, description, link }: Props) {
+  const [linkHovered, setLinkHovered] = useState(false);
   return (
     <div className="max-w-[45%] mx-auto z-10">
       <h3 className={"text-4xl mb-3 ml-2 font-bold"}>{title}</h3>
       <div className="relative px-6 py-4">
         <Image
           alt="a noisy background"
-          className="absolute top-0 left-0 z-0"
+          className="absolute top-0 left-0 z-0 opacity-40"
           layout="fill"
           src={"/assets/Noisy-BG.png"}
         />
@@ -30,11 +31,13 @@ export default function PostItem({ title, description, link }: Props) {
           className="absolute top-0  right-0 z-0 w-24 h-24"
         >
           <Canvas
+            onMouseEnter={() => setLinkHovered(true)}
+            onMouseLeave={() => setLinkHovered(false)}
             className="-mt-[40%] ml-[40%]"
             onCreated={(state) => state.gl.setClearColor("black", 0.0)}
             camera={{ position: [0, 0, 4] }}
           >
-            <LinkModel />
+            <LinkModel hovered={linkHovered} />
           </Canvas>
         </a>
       </div>

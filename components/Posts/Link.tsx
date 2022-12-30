@@ -3,24 +3,26 @@ import { useState, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Mesh, Vector3, Quaternion } from "three";
 
-export default function LinkModel() {
+type Props = {
+  hovered: boolean;
+};
+export default function LinkModel({ hovered }: Props) {
   const { nodes, materials } = useGLTF("/models/link.gltf");
-  const [hovered, hover] = useState(false);
+  // const [hovered, hover] = useState(false);
   const link = useRef<Mesh>(null);
   const vec = new Vector3();
   const viewport = useThree((state) => state.viewport);
   useFrame((state) => {
     const SCALE = 1.2;
-    link.current?.position.lerp(
-      vec.set(
-        (state.mouse.x * viewport.width) / 10,
-        (state.mouse.y * viewport.height) / 10,
-        0
-      ),
-      0.1
-    );
-
     if (hovered) {
+      link.current?.position.lerp(
+        vec.set(
+          (state.mouse.x * viewport.width) / 10,
+          (state.mouse.y * viewport.height) / 10,
+          0
+        ),
+        0.1
+      );
       link.current?.scale.lerp(vec.set(SCALE, SCALE, SCALE), 0.1);
     } else {
       link.current?.scale.lerp(vec.set(1.0, 1.0, 1.0), 0.1);
@@ -30,9 +32,6 @@ export default function LinkModel() {
 
   return (
     <>
-      <ambientLight intensity={1} />
-      <pointLight position={[20, 30, 10]} />
-      <pointLight position={[-10, -10, -10]} color="blue" />
       <Bounds fit clip observe damping={6} margin={1.0}>
         <Float
           speed={2} // Animation speed, defaults to 1
@@ -48,8 +47,8 @@ export default function LinkModel() {
               geometry={nodes.Plane001.geometry}
               position={[0, 0.01, 0.03]}
               rotation={[1.56, -0.78, 0.75]}
-              onPointerOver={() => hover(true)}
-              onPointerOut={() => hover(false)}
+              // onPointerOver={() => hover(true)}
+              // onPointerOut={() => hover(false)}
             >
               <meshBasicMaterial>
                 <GradientTexture
