@@ -1,10 +1,7 @@
 import Image from "next/image";
 import Person from "./Person";
 import { Ubuntu, Ubuntu_Mono } from "@next/font/google";
-import { Canvas } from "@react-three/fiber";
-import { lazy } from "react";
-import { Float, Html } from "@react-three/drei";
-const PersonModel = lazy(() => import("./Person"));
+
 import { Glow } from "../Orb/Orb";
 
 const ubuntu = Ubuntu({
@@ -20,23 +17,23 @@ const ubuntuMono = Ubuntu_Mono({
 
 export default function Hero() {
   return (
-    <div className="h-screen flex">
+    <div className="h-screen flex flex-col lg:flex-row justify-center items-center">
       <div className="w-1/2 relative flex items-center justify-center">
-        <div className="h-96 w-96 relative ">
-          <Image
+        <div className="w-full h-full relative mb-10 ">
+          {/* <Image
             fill
             className="object-scale-down"
             src="/assets/Hero-Ilya.png"
             alt=""
-          />
+          /> */}
         </div>
       </div>
-      <div className="w-1/2 relative flex flex-col justify-center">
-        <p className={"text-5xl mb-12 font-mono"}>
+      <div className="w-full lg:w-1/2 relative flex flex-col justify-center">
+        <p className="font-mono text-3xl mb-6 text-center lg:text-5xl lg:text-left lg:mb-12">
           hey, i’m ilya,
           <br /> full-stack dev.
         </p>
-        <p className="text-5xl">
+        <p className="text-3xl text-center lg:text-5xl  lg:text-left">
           enthusiast first,
           <br /> professional second.
         </p>

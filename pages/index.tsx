@@ -6,29 +6,24 @@ import Posts from "../components/Posts/Posts";
 import Stack from "@/components/Stack/Stack";
 import Orb from "@/components/Orb/Orb";
 import Cup from "@/components/Stack/Cup";
-import { Waypoint } from "react-waypoint";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import {
-  Billboard,
   Bounds,
-  MeshDistortMaterial,
   Float,
+  Html,
+  Environment,
+  ContactShadows,
   ScrollControls,
   Scroll,
-  Html,
 } from "@react-three/drei";
 
 import { motion as motion3d } from "framer-motion-3d";
 
 import * as THREE from "three";
-import {
-  EffectComposer,
-  Bloom,
-  Noise,
-  Vignette,
-} from "@react-three/postprocessing";
-import { Canvas } from "@react-three/fiber";
+
+import { Canvas, useThree } from "@react-three/fiber";
+
+const Laptop = lazy(() => import("@/components/Hero/Laptop"));
 
 export default function Home() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -76,7 +71,29 @@ export default function Home() {
                   </div>
                 </div>
               </Scroll>
-              <Cup active={stackActive} />
+              <Scroll>
+                <Float
+                  rotationIntensity={0.5}
+                  floatingRange={[-0.1, 0.1]}
+                  floatIntensity={1}
+                  speed={2}
+                >
+                  <Cup active={stackActive} />
+                  <pointLight position={[10, 10, 10]} intensity={0.1} />
+                  <Scroll>
+                    <Suspense fallback={null}>
+                      <group
+                        renderOrder={99}
+                        rotation={[1, 0.2, -0.2]}
+                        scale={0.1}
+                        position={[-0.5, 0.2, -1]}
+                      >
+                        <Laptop />
+                      </group>
+                    </Suspense>
+                  </Scroll>
+                </Float>
+              </Scroll>
             </ScrollControls>
           </Canvas>
         </div>

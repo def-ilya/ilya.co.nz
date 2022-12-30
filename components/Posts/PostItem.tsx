@@ -16,8 +16,8 @@ type Props = {
 export default function PostItem({ title, description, link }: Props) {
   const [linkHovered, setLinkHovered] = useState(false);
   return (
-    <div className="max-w-[45%] mx-auto z-10">
-      <h3 className={"text-4xl mb-3 ml-2 font-bold"}>{title}</h3>
+    <div className="w-full sm:w-3/4 lg:max-w-[45%] mx-auto z-10">
+      <h3 className={"text-xl lg:text-4xl mb-3 ml-2 font-bold"}>{title}</h3>
       <div className="relative px-6 py-4">
         <Image
           alt="a noisy background"
@@ -25,7 +25,7 @@ export default function PostItem({ title, description, link }: Props) {
           layout="fill"
           src={"/assets/Noisy-BG.png"}
         />
-        <div className="text-lg relative z-10">{description}</div>
+        <div className="text-md lg:text-lg relative z-10">{description}</div>
         <a
           href="https://blog.hubspot.com/marketing/how-to-start-a-blog"
           className="absolute top-0  right-0 z-0 w-24 h-24"
