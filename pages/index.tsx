@@ -4,8 +4,14 @@ import Image from "next/image";
 import Hero from "../components/Hero/Hero";
 import Posts from "../components/Posts/Posts";
 import Stack from "@/components/Stack/Stack";
+import Contact from "@/components/Contact/Contact";
+import Socials from "@/components/Socials/Socials";
+import Mail from "@/components/Contact/Mail";
+
 import Orb from "@/components/Orb/Orb";
 import Cup from "@/components/Stack/Cup";
+import EmptyCup from "@/components/Socials/EmptyCup";
+
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import {
   Bounds,
@@ -26,13 +32,15 @@ import { Canvas, useThree } from "@react-three/fiber";
 const Laptop = lazy(() => import("@/components/Hero/Laptop"));
 
 export default function Home() {
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  // const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setWindowSize({ width: window.innerWidth, height: window.innerWidth });
-    });
-  }, []);
+  // useEffect(() => {
+  //   setWindowSize({ width: window.innerWidth, height: window.innerWidth });
+
+  //   window.addEventListener("resize", () => {
+  //     setWindowSize({ width: window.innerWidth, height: window.innerWidth });
+  //   });
+  // }, []);
 
   const [stackActive, setStackActive] = useState(false);
   return (
@@ -49,49 +57,46 @@ export default function Home() {
           <Canvas shadows camera={{ position: [0, 0, 15], fov: 45 }}>
             <color attach="background" args={["black"]}></color>
             <ScrollControls
-              pages={3}
+              pages={5}
               distance={1}
               damping={6}
               horizontal={false}
               infinite={false}
             >
               <Orb emphasize={false} />
-
               <Scroll html>
                 <div className="w-screen">
                   <div className="max-w-[1280px] mx-auto">
-                    <Hero />
-
+                    {/* <Hero /> */}
+                    <div className="h-screen" />
                     <Posts />
-
-                    <Stack
-                      active={stackActive}
-                      setActive={(val) => setStackActive(val)}
-                    />
+                    <Stack />
+                    <Contact />
+                    <Socials />
                   </div>
                 </div>
               </Scroll>
+
               <Scroll>
                 <Float
-                  rotationIntensity={0.5}
+                  rotationIntensity={0.08}
                   floatingRange={[-0.1, 0.1]}
-                  floatIntensity={1}
+                  floatIntensity={0.5}
                   speed={2}
                 >
-                  <Cup active={stackActive} />
-                  <pointLight position={[10, 10, 10]} intensity={0.1} />
-                  <Scroll>
-                    <Suspense fallback={null}>
-                      <group
-                        renderOrder={99}
-                        rotation={[1, 0.2, -0.2]}
-                        scale={0.1}
-                        position={[-0.5, 0.2, -1]}
-                      >
-                        <Laptop />
-                      </group>
-                    </Suspense>
-                  </Scroll>
+                  <Cup />
+                  <pointLight position={[10, 10, 10]} intensity={0.5} />
+                  <Suspense fallback={null}>
+                    <group
+                      renderOrder={99}
+                      rotation={[1, 0.2, -0.2]}
+                      scale={0.1}
+                      position={[-0.5, 0.2, -1]}
+                    >
+                      <Laptop />
+                    </group>
+                  </Suspense>
+                  <EmptyCup />
                 </Float>
               </Scroll>
             </ScrollControls>

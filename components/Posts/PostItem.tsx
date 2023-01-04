@@ -1,4 +1,3 @@
-import { Ubuntu } from "@next/font/google";
 import Image from "next/image";
 
 import { lazy, Suspense, useRef, useState } from "react";
@@ -10,10 +9,10 @@ const LinkModel = lazy(() => import("./Link"));
 type Props = {
   title?: string;
   description?: string;
-  link?: string;
+  href?: string;
 };
 
-export default function PostItem({ title, description, link }: Props) {
+export default function PostItem({ title, description, href }: Props) {
   const [linkHovered, setLinkHovered] = useState(false);
   return (
     <div className="w-full sm:w-3/4 lg:max-w-[45%] mx-auto z-10">
@@ -26,10 +25,7 @@ export default function PostItem({ title, description, link }: Props) {
           src={"/assets/Noisy-BG.png"}
         />
         <div className="text-md lg:text-lg relative z-10">{description}</div>
-        <a
-          href="https://blog.hubspot.com/marketing/how-to-start-a-blog"
-          className="absolute top-0  right-0 z-0 w-24 h-24"
-        >
+        <a href={href} className="absolute top-0  right-0 z-0 w-24 h-24">
           <Canvas
             onMouseEnter={() => setLinkHovered(true)}
             onMouseLeave={() => setLinkHovered(false)}

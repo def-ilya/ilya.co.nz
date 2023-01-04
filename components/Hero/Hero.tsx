@@ -1,19 +1,7 @@
 import Image from "next/image";
 import Person from "./Person";
-import { Ubuntu, Ubuntu_Mono } from "@next/font/google";
 
 import { Glow } from "../Orb/Orb";
-
-const ubuntu = Ubuntu({
-  weight: ["400", "700"],
-  style: ["normal"],
-  subsets: ["latin"],
-});
-const ubuntuMono = Ubuntu_Mono({
-  weight: ["400", "700"],
-  style: ["normal"],
-  subsets: ["latin"],
-});
 
 export default function Hero() {
   return (

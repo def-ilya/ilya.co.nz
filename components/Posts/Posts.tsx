@@ -15,18 +15,22 @@ export default function Posts() {
         </div>
 
         <PostItem
+          href="#"
           title="Using AI to Herd Cats"
           description="Artficial intelligence is used to count through a large segment of the population and collect their cats into NFTs."
         />
         <PostItem
+          href="#"
           title="Using AI to Herd Cats"
           description="Artficial intelligence is used to count through a large segment of the population and collect their cats into NFTs."
         />
         <PostItem
+          href="#"
           title="Using AI to Herd Cats"
           description="Artficial intelligence is used to count through a large segment of the population and collect their cats into NFTs."
         />
         <PostItem
+          href="#"
           title="Using AI to Herd Cats"
           description="Artficial intelligence is used to count through a large segment of the population and collect their cats into NFTs."
         />
