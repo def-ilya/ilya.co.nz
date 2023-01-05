@@ -15,15 +15,8 @@ import {
   Noise,
   Vignette,
 } from "@react-three/postprocessing";
-import { useFrame, useThree } from "@react-three/fiber";
-import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
-import {
-  useEffect,
-  useState,
-  useRef,
-  forwardRef,
-  MutableRefObject,
-} from "react";
+import { useFrame, useThree, MeshProps } from "@react-three/fiber";
+import { useRef, forwardRef, Ref } from "react";
 import { LayerMaterial, Depth } from "lamina";
 
 export default function Orb() {
@@ -103,7 +96,7 @@ const Sphere = forwardRef(
       floatIntensity={0.1} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
       floatingRange={[-0.1, 0.1]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
     >
-      <motion3d.mesh ref={ref} {...props}>
+      <motion3d.mesh ref={ref as Ref<MeshProps> | undefined} {...props}>
         <sphereGeometry args={[size, 128, 128]} />
         <MeshDistortMaterial
           transparent={true}
