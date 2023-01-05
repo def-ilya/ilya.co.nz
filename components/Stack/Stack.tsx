@@ -7,7 +7,7 @@ import {
   useTransform,
   useSpring,
 } from "framer-motion";
-import { useRef } from "react";
+import { useRef, MouseEvent } from "react";
 import { SyntheticEvent } from "studio/node_modules/@types/react";
 
 type Props = {};
@@ -29,9 +29,10 @@ export default function Stack({}: Props) {
   function handleMouse(
     x: MotionValue<number>,
     y: MotionValue<number>,
-    event: SyntheticEvent
+    event: MouseEvent
   ) {
-    const rect = event.currentTarget.getBoundingClientRect();
+    const eventTarget = event.target as HTMLElement;
+    const rect = eventTarget.getBoundingClientRect();
 
     x.set((event.clientX - rect.left) * 4);
     y.set((event.clientY - rect.top) * 4);
