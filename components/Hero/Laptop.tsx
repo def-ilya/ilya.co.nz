@@ -26,13 +26,13 @@ export default function Laptop({ props, position }: Props) {
         <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
           <mesh
             material={materials.aluminium}
-            geometry={nodes["Cube008"].geometry}
+            geometry={(nodes["Cube008"] as THREE.Mesh).geometry}
           />
           <mesh
             material={materials["matte.001"]}
-            geometry={nodes["Cube008_1"].geometry}
+            geometry={(nodes["Cube008_1"] as THREE.Mesh).geometry}
           />
-          <mesh geometry={nodes["Cube008_2"].geometry}>
+          <mesh geometry={(nodes["Cube008_2"] as THREE.Mesh).geometry}>
             <meshStandardMaterial
               color={"#1d1d1d"}
               emissive={"#220033"}
