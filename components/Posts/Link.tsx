@@ -2,7 +2,7 @@ import { useGLTF, GradientTexture, Bounds, Float } from "@react-three/drei";
 import { useState, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Mesh, Vector3, Quaternion } from "three";
-
+import * as THREE from "three";
 type Props = {
   hovered: boolean;
 };
@@ -44,7 +44,7 @@ export default function LinkModel({ hovered }: Props) {
               ref={link}
               castShadow
               receiveShadow
-              geometry={nodes.Plane001.geometry}
+              geometry={(nodes.Plane001 as THREE.Mesh).geometry}
               position={[0, 0.01, 0.03]}
               rotation={[1.56, -0.78, 0.75]}
               // onPointerOver={() => hover(true)}
