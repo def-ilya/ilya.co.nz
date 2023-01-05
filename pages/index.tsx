@@ -1,48 +1,31 @@
 import Head from "next/head";
-import Image from "next/image";
 
-import Hero from "../components/Hero/Hero";
+import Hero from "@/components/Hero/Hero";
 import Posts from "../components/Posts/Posts";
 import Stack from "@/components/Stack/Stack";
 import Contact from "@/components/Contact/Contact";
 import Socials from "@/components/Socials/Socials";
-import Mail from "@/components/Contact/Mail";
 
 import Orb from "@/components/Orb/Orb";
-import Cup from "@/components/Stack/Cup";
-import EmptyCup from "@/components/Socials/EmptyCup";
+import Items from "@/components/Scene/Items";
+import { useState, Suspense } from "react";
+import { ScrollControls, Scroll } from "@react-three/drei";
 
-import { useState, useEffect, useRef, lazy, Suspense } from "react";
-import {
-  Bounds,
-  Float,
-  Html,
-  Environment,
-  ContactShadows,
-  ScrollControls,
-  Scroll,
-} from "@react-three/drei";
+import { createClient } from "next-sanity";
+import { config } from "../lib/config";
 
-import { motion as motion3d } from "framer-motion-3d";
+import { Canvas } from "@react-three/fiber";
+import dynamic from "next/dynamic";
 
-import * as THREE from "three";
+const Loader = dynamic(() => import("../components/Scene/Loader"), {
+  ssr: false,
+});
 
-import { Canvas, useThree } from "@react-three/fiber";
-
-const Laptop = lazy(() => import("@/components/Hero/Laptop"));
-
-export default function Home() {
-  // const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
-
-  // useEffect(() => {
-  //   setWindowSize({ width: window.innerWidth, height: window.innerWidth });
-
-  //   window.addEventListener("resize", () => {
-  //     setWindowSize({ width: window.innerWidth, height: window.innerWidth });
-  //   });
-  // }, []);
-
-  const [stackActive, setStackActive] = useState(false);
+type Props = {
+  data: object;
+};
+export default function Home({ data }: Props) {
+  const [loaded, setLoaded] = useState(false);
   return (
     <>
       <Head>
@@ -54,7 +37,13 @@ export default function Home() {
 
       <main className={" bg-dark-blue text-light-clay font-sans"}>
         <div className="fixed top-0 left-0 right-0 h-screen w-screen z-20">
-          <Canvas shadows camera={{ position: [0, 0, 15], fov: 45 }}>
+          <Canvas
+            shadows
+            dpr={[1, 2]}
+            gl={{ depth: false }}
+            camera={{ position: [0, 0, 15], fov: 45 }}
+          >
+            <Loader onLoaded={setLoaded} />
             <color attach="background" args={["black"]}></color>
             <ScrollControls
               pages={5}
@@ -63,46 +52,38 @@ export default function Home() {
               horizontal={false}
               infinite={false}
             >
-              <Orb emphasize={false} />
+              <Orb />
               <Scroll html>
                 <div className="w-screen">
                   <div className="max-w-[1280px] mx-auto">
-                    {/* <Hero /> */}
-                    <div className="h-screen" />
-                    <Posts />
+                    <Hero />
+                    <Posts posts={data.posts} />
                     <Stack />
                     <Contact />
                     <Socials />
                   </div>
                 </div>
               </Scroll>
-
-              <Scroll>
-                <Float
-                  rotationIntensity={0.08}
-                  floatingRange={[-0.1, 0.1]}
-                  floatIntensity={0.5}
-                  speed={2}
-                >
-                  <Cup />
-                  <pointLight position={[10, 10, 10]} intensity={0.5} />
-                  <Suspense fallback={null}>
-                    <group
-                      renderOrder={99}
-                      rotation={[1, 0.2, -0.2]}
-                      scale={0.1}
-                      position={[-0.5, 0.2, -1]}
-                    >
-                      <Laptop />
-                    </group>
-                  </Suspense>
-                  <EmptyCup />
-                </Float>
-              </Scroll>
+              <Suspense>
+                <Items />
+              </Suspense>
             </ScrollControls>
           </Canvas>
         </div>
       </main>
     </>
   );
+}
+
+const client = createClient(config);
+
+export async function getStaticProps() {
+  const data = { posts: [] };
+
+  data.posts = await client.fetch(`*[_type == "post"]`);
+  return {
+    props: {
+      data,
+    },
+  };
 }

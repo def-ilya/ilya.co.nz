@@ -32,7 +32,7 @@ export default function LinkModel({ hovered }: Props) {
 
   return (
     <>
-      <Bounds fit clip observe damping={6} margin={1.0}>
+      <Bounds fit observe damping={6} margin={1.0}>
         <Float
           speed={2} // Animation speed, defaults to 1
           rotationIntensity={2} // XYZ rotation intensity, defaults to 1
