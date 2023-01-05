@@ -50,16 +50,22 @@ export default function Stack({}: Props) {
           className="flex justify-center items-center md:justify-start gap-8 max-w-xl md:max-w-2xl flex-wrap ml-8"
         >
           {badges.map((badge, i) => {
+            // eslint-disable-next-line
             const x = useMotionValue(200);
+            // eslint-disable-next-line
             const y = useMotionValue(200);
 
+            // eslint-disable-next-line
             const rotateX = useTransform(y, [0, 400], [45, -45]);
+            // eslint-disable-next-line
             const rotateY = useTransform(x, [0, 400], [-45, 45]);
 
+            // eslint-disable-next-line
             const springX = useSpring(rotateX, {
               stiffness: 1000,
               damping: 10,
             });
+            // eslint-disable-next-line
             const springY = useSpring(rotateY, {
               restDelta: 0,
             });
