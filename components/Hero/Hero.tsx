@@ -1,7 +1,4 @@
 import Image from "next/image";
-import Person from "./Person";
-
-import { Glow } from "../Orb/Orb";
 
 export default function Hero() {
   return (
