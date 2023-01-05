@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 import Hero from "@/components/Hero/Hero";
-import Posts from "../components/Posts/Posts";
+import Posts from "@/components/Posts/Posts";
 import Stack from "@/components/Stack/Stack";
 import Contact from "@/components/Contact/Contact";
 import Socials from "@/components/Socials/Socials";
