@@ -22,8 +22,15 @@ const Loader = dynamic(() => import("../components/Scene/Loader"), {
 });
 
 type Props = {
-  data: object;
+  data: { posts: Post[] };
 };
+
+interface Post {
+  link: string;
+  title: string;
+  desc: string;
+}
+
 export default function Home({ data }: Props) {
   const [loaded, setLoaded] = useState(false);
   return (

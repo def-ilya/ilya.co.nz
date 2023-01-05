@@ -3,14 +3,17 @@ import PostsGradient from "../../public/assets/Posts-Gradient.svg";
 import Image from "next/image";
 
 import { useEffect } from "react";
+
 type Props = {
   posts: Post[];
 };
+
 interface Post {
   link: string;
   title: string;
   desc: string;
 }
+
 export default function Posts({ posts }: Props) {
   useEffect(() => {
     console.log(posts);
@@ -27,7 +30,7 @@ export default function Posts({ posts }: Props) {
             src={PostsGradient}
           />
         </div>
-        {posts.map((post: Post, i) => {
+        {posts.map((post, i) => {
           if (i < 5)
             return (
               <PostItem
