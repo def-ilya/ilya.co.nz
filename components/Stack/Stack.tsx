@@ -43,12 +43,12 @@ export default function Stack({}: Props) {
   return (
     <motion.div className="h-screen min-w-screen flex justify-center items-center">
       <div className="m-auto flex flex-col justify-center items-center">
-        <h2 className="mx-10  text-3xl md:text-4xl lg:text-6xl mb-16 font-bold">
+        <h2 className="mx-10 text-3xl md:text-4xl lg:text-6xl mb-16 font-bold">
           i&apos;m kind of a nerd.
         </h2>
         <motion.div
           ref={ref}
-          className="flex justify-center items-center md:justify-start gap-8 max-w-xl md:max-w-2xl flex-wrap ml-8"
+          className="flex justify-center items-center md:justify-start gap-8 max-w-xl md:max-w-2xl flex-wrap mx-4 md:ml-8"
         >
           {badges.map((badge, i) => {
             // eslint-disable-next-line
