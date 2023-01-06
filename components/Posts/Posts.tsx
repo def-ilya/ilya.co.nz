@@ -1,5 +1,6 @@
 import PostItem from "./PostItem";
 import PostsGradient from "../../public/assets/Posts-Gradient.svg";
+import Zoom from "../../public/assets/zoom.svg";
 import Image from "next/image";
 
 import { useEffect } from "react";
@@ -39,8 +40,14 @@ export default function Posts({ posts }: Props) {
                 description={post.desc}
               />
             );
-          return <></>;
         })}
+        <a
+          className="w-full -mt-10 ml-2 sm:ml-2 md:ml-32 lg:ml-6 text-purple text-md flex items-center transition hover:text-white hover:translate-x-8 hover:scale-105"
+          href="https://www.linkedin.com/in/k0t/recent-activity/posts/"
+        >
+          Read More
+          <Image className="ml-1" src={Zoom} alt="" />
+        </a>
       </div>
     </div>
   );

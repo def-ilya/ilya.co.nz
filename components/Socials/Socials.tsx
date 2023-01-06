@@ -3,7 +3,7 @@ import LogoImage from "./LogoImage";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 export default function Socials() {
   return (
-    <div className="h-screen min-w-screen flex justify-center items-center">
+    <div className="pb-16 md:pb-0 h-screen min-w-screen flex justify-center items-center">
       <div className="max-w-[1280px] mx-auto">
         <h2 className="mx-10 text-3xl md:text-4xl lg:text-6xl mb-6 font-bold">
           stalk my socials here
