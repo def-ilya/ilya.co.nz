@@ -21,7 +21,7 @@ export default function Posts({ posts }: Props) {
   }, []);
 
   return (
-    <div className="h-screen min-w-screen flex justify-center items-center">
+    <div className="min-h-screen min-w-screen flex justify-center items-center">
       <div className="flex flex-wrap mx-10 lg:mx-24 gap-10 lg:gap-16 relative my-auto">
         <div className="absolute top-1/2 first-letter:z-0">
           <Image
