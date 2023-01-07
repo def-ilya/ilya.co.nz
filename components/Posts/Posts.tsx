@@ -42,11 +42,11 @@ export default function Posts({ posts }: Props) {
             );
         })}
         <a
-          className="w-full -mt-10 ml-2 sm:ml-2 md:ml-32 lg:ml-6 text-purple text-md flex items-center transition hover:text-white hover:translate-x-8 hover:scale-105"
+          className="w-full -mt-10 ml-2 sm:ml-24 md:ml-28 lg:ml-6 text-purple text-md flex items-center transition hover:text-white hover:-translate-y-2"
           href="https://www.linkedin.com/in/k0t/recent-activity/posts/"
         >
           Read More
-          <Image className="ml-1" src={Zoom} alt="" />
+          <Image className="ml-1 hover:scale-105 " src={Zoom} alt="" />
         </a>
       </div>
     </div>
