@@ -70,9 +70,11 @@ export default function Contact() {
                 </div>
                 &#125;&apos;
               </span>
-              <button className="hidden" type="submit">
-                Submit
-              </button>
+              {formData.response === "" && formData.email !== "" && (
+                <button className="hover:underline opacity-70" type="submit">
+                  enter
+                </button>
+              )}
             </form>
             <p>{formData.response}</p>
           </div>
