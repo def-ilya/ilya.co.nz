@@ -10,9 +10,18 @@ export default function Socials() {
         </h2>
         <motion.div className="relative max-w-fit mx-auto flex justify-center bg-black bg-opacity-20 backdrop-blur-sm py-3 px-6 rounded-3xl">
           <motion.div className="z-10 flex mx-auto gap-6 justify-center items-center">
-            <LogoImage src="/assets/logos/linkedin.svg" href="#" />
-            <LogoImage src="/assets/logos/github.svg" href="#" />
-            <LogoImage src="/assets/logos/discord.svg" href="#" />
+            <LogoImage
+              src="/assets/logos/linkedin.svg"
+              href="https://linkedin.com/in/k0t"
+            />
+            <LogoImage
+              src="/assets/logos/github.svg"
+              href="https://github.com/def-ilya"
+            />
+            <LogoImage
+              src="/assets/logos/discord.svg"
+              href="https://discordapp.com/users/636064055311728661"
+            />
           </motion.div>
         </motion.div>
       </div>
